@@ -15,7 +15,7 @@ extra-source-files:
 
 source-repository HEAD
   type: git
-  location: https://github.com/axman6/servant-prometheus
+  location: https://github.com/paidright/servant-prometheus
 
 library
   hs-source-dirs:      lib
