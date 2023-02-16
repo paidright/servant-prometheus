@@ -4,6 +4,7 @@ module Servant.Prometheus
 
     , monitorServant
     , servePrometheusMetrics
+    , HasEndpoints(..)
     ) where
 
 import           Network.HTTP.Types                     (status200)
@@ -13,7 +14,7 @@ import           Network.Wai                            (Application,
 import           Prometheus                             (exportMetricsAsText)
 
 import           Servant.Prometheus.Internal.Core       (Meters, meters)
-import           Servant.Prometheus.Internal.Endpoints  (HasEndpoints)
+import           Servant.Prometheus.Internal.Endpoints  (HasEndpoints(..))
 import           Servant.Prometheus.Internal.Middleware (observeRequests)
 
 
