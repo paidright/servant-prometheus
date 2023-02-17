@@ -1,5 +1,5 @@
 name:                servant-prometheus
-version:             0.2.0.0
+version:             0.2.1.0
 synopsis:            Helpers for using prometheus with servant
 description:         Helpers for using prometheus with servant. Each endpoint has its own metrics allowing more detailed monitoring than wai-middleware-prometheus allows
 license:             BSD3
@@ -27,9 +27,9 @@ library
                      , Servant.Prometheus.Internal.Middleware
                      , Servant.Prometheus.Internal.Latency
                      , Servant.Prometheus.Internal.StatusCodes
-  build-depends:       base >= 4.7 && < 4.15
+  build-depends:       base
                      , prometheus-client >= 1.0
-                     , servant > 0.10 && < 0.19
+                     , servant
                      , servant-auth
                      , servant-server
                      , http-types

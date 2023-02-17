@@ -1,10 +1,12 @@
 {-# LANGUAGE CPP                 #-}
 {-# LANGUAGE DataKinds           #-}
+{-# LANGUAGE FlexibleContexts    #-}
 {-# LANGUAGE FlexibleInstances   #-}
 {-# LANGUAGE KindSignatures      #-}
 {-# LANGUAGE OverloadedStrings   #-}
 {-# LANGUAGE ScopedTypeVariables #-}
 {-# LANGUAGE TypeOperators       #-}
+{-# LANGUAGE UndecidableInstances #-}
 
 module Servant.Prometheus.Internal.Endpoints
   ( HasEndpoints (..)
@@ -15,6 +17,7 @@ module Servant.Prometheus.Internal.Endpoints
 
 import           Servant.API        as Servant
 import           Servant.Auth       (Auth)
+import           Servant.API.Generic (ToServantApi)
 
 import           Control.Monad      (mplus)
 import           Data.Text          (Text)
@@ -100,6 +103,10 @@ instance HasEndpoints (sub :: *) => HasEndpoints (BasicAuth r a :> sub) where
 instance HasEndpoints (sub :: *) => HasEndpoints (HEADER h a :> sub) where
     getEndpoints _ = getEndpoints (Proxy :: Proxy sub)
     getEndpoint _ = getEndpoint (Proxy :: Proxy sub)
+
+instance HasEndpoints (ToServantApi routes) => HasEndpoints (NamedRoutes routes) where
+  getEndpoints _ = getEndpoints (Proxy :: Proxy (ToServantApi routes))
+  getEndpoint _ = getEndpoint (Proxy :: Proxy (ToServantApi routes))
 
 instance HasEndpoints (sub :: *) => HasEndpoints (QUERY_PARAM (h :: Symbol) a :> sub) where
     getEndpoints _ = getEndpoints (Proxy :: Proxy sub)
